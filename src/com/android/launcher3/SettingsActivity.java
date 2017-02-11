@@ -30,6 +30,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
+import android.preference.SwitchPreference;
 import android.provider.Settings;
 import android.provider.Settings.System;
 import android.support.v4.os.BuildCompat;
@@ -186,6 +188,11 @@ public class SettingsActivity extends Activity {
                     startActivity(new Intent(getActivity(), MultiSelectRecyclerViewActivity.class));
                     return false;
             });
+
+            SwitchPreference leftTabPage = (SwitchPreference) findPreference(Utilities.SHOW_LEFT_TAB_PREFERENCE_KEY);
+            if (!isSearchInstalled()) {
+                getPreferenceScreen().removePreference(leftTabPage);
+            }
         }
 
         @Override
@@ -241,6 +248,10 @@ public class SettingsActivity extends Activity {
 
                 entries.add(label);
             }
+        }
+
+        private boolean isSearchInstalled() {
+            return Utilities.isPackageInstalled(getActivity(), LauncherTab.SEARCH_PACKAGE);
         }
     }
 
