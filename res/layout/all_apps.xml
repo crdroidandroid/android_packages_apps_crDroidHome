@@ -67,7 +67,8 @@
         <FrameLayout
             android:id="@+id/search_container"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/all_apps_search_bar_height"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/all_apps_search_bar_height"
             android:layout_gravity="center|top"
             android:gravity="center|bottom"
             android:orientation="horizontal"
@@ -76,19 +77,23 @@
             <com.android.launcher3.ExtendedEditText
                 android:id="@+id/search_box_input"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/all_apps_search_bar_field_height"
-                android:background="@android:color/transparent"
+                android:layout_height="@dimen/all_apps_search_round_bar_height"
+                android:background="@drawable/bg_drawer_search_bar_round"
                 android:layout_gravity="bottom"
                 android:focusableInTouchMode="true"
+                android:layout_marginTop="@dimen/all_apps_search_bar_round_margin_top"
+                android:layout_marginBottom="@dimen/all_apps_search_bar_round_margin_bottom"
+                android:layout_marginStart="@dimen/all_apps_search_bar_round_margin_horizontal"
+                android:layout_marginEnd="@dimen/all_apps_search_bar_round_margin_horizontal"
                 android:gravity="center"
                 android:imeOptions="actionSearch|flagNoExtractUi"
                 android:inputType="text|textNoSuggestions|textCapWords"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/drawer_search_bar_text"
                 android:hint="@string/all_apps_search_bar_hint"
-                android:textColorHint="@drawable/all_apps_search_hint"
+                android:textColorHint="@color/drawer_search_bar_text_hint"
                 android:textSize="16sp" />
         </FrameLayout>
 

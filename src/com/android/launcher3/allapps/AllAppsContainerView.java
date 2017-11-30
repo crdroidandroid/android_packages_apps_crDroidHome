@@ -313,6 +313,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
                 mAdapter.setNumAppsPerRow(mNumAppsPerRow);
                 mApps.setNumAppsPerRow(mNumAppsPerRow, mNumPredictedAppsPerRow);
             }
+            /*
             if (!grid.isVerticalBarLayout()) {
                 MarginLayoutParams searchContainerLp =
                         (MarginLayoutParams) mSearchContainer.getLayoutParams();
@@ -321,6 +322,7 @@ public class AllAppsContainerView extends BaseContainerView implements DragSourc
                         + mSearchContainerMinHeight;
                 mSearchContainer.setLayoutParams(searchContainerLp);
             }
+            */
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
             return;
         }

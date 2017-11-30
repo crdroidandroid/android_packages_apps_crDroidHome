@@ -22,6 +22,8 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -33,9 +35,11 @@ import android.widget.TextView.OnEditorActionListener;
 
 import com.android.launcher3.ExtendedEditText;
 import com.android.launcher3.Launcher;
+import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.discovery.AppDiscoveryItem;
 import com.android.launcher3.discovery.AppDiscoveryUpdateState;
+import com.android.launcher3.graphics.TintedDrawableSpan;
 import com.android.launcher3.util.ComponentKey;
 
 import java.util.ArrayList;
@@ -44,7 +48,8 @@ import java.util.ArrayList;
  * An interface to a search box that AllApps can command.
  */
 public abstract class AllAppsSearchBarController
-        implements TextWatcher, OnEditorActionListener, ExtendedEditText.OnBackKeyListener {
+        implements TextWatcher, OnEditorActionListener, ExtendedEditText.OnBackKeyListener,
+        View.OnFocusChangeListener {
 
     protected Launcher mLauncher;
     protected AlphabeticalAppsList mApps;
@@ -54,6 +59,8 @@ public abstract class AllAppsSearchBarController
 
     protected DefaultAppSearchAlgorithm mSearchAlgorithm;
     protected InputMethodManager mInputMethodManager;
+
+    private SpannableString mSearchBarHint;
 
     public void setVisibility(int visibility) {
         mInput.setVisibility(visibility);
@@ -72,11 +79,16 @@ public abstract class AllAppsSearchBarController
         mInput.addTextChangedListener(this);
         mInput.setOnEditorActionListener(this);
         mInput.setOnBackKeyListener(this);
+        mInput.setOnFocusChangeListener(this);
 
         mInputMethodManager = (InputMethodManager)
                 mInput.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         mSearchAlgorithm = onInitializeSearch();
+
+        mSearchBarHint = new SpannableString("  " + mInput.getHint());
+        mSearchBarHint.setSpan(new TintedDrawableSpan(mLauncher, R.drawable.ic_allapps_search),
+                0, 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 
         onInitialized();
     }
@@ -147,6 +159,11 @@ public abstract class AllAppsSearchBarController
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        mInput.setHint(hasFocus ? "" : mSearchBarHint);
     }
 
     /**
