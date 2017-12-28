@@ -100,6 +100,7 @@
             android:key="pref_left_tab"
             android:title="@string/left_tab_label"
             android:summary="@string/left_tab_description"
+            android:defaultValue="true"
             android:persistent="true" />
 
     </PreferenceCategory>
@@ -119,7 +120,7 @@
             android:key="pref_searchBar"
             android:title="@string/show_search_bar_title"
             android:summary="@string/show_search_bar_summary"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:persistent="true" />
 
         <ListPreference

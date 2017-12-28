@@ -178,7 +178,7 @@ public final class Utilities {
     }
 
     public static boolean isBottomSearchBar(Context context) {
-        return getPrefs(context).getBoolean(SHOW_SEARCH_BAR_PREFERENCE_KEY, true);
+        return getPrefs(context).getBoolean(SHOW_SEARCH_BAR_PREFERENCE_KEY, false);
     }
 
     public static boolean isTopSpaceReserved(Context context) {
@@ -220,7 +220,7 @@ public final class Utilities {
     }
 
     public static boolean isShowLeftTab(Context context) {
-        return getPrefs(context).getBoolean(SHOW_LEFT_TAB_PREFERENCE_KEY, false);
+        return getPrefs(context).getBoolean(SHOW_LEFT_TAB_PREFERENCE_KEY, true);
     }
 
     public static boolean getAllowRotationDefaultValue(Context context) {
