@@ -49,5 +49,5 @@ public final class FeatureFlags {
     // When enabled, app discovery will be enabled if service is implemented
     public static final boolean DISCOVERY_ENABLED = false;
     // enable/disable adaptive icon support
-    public static final boolean ADAPTIVE_ICON_ENABLED = true;
+    public static final boolean ADAPTIVE_ICON_ENABLED = false;
 }

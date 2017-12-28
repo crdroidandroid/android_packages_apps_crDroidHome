@@ -41,7 +41,7 @@
         <SwitchPreference
             android:key="pref_adaptiveIcons"
             android:title="@string/adaptive_icons_title"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:persistent="true" />
 
         <ListPreference
