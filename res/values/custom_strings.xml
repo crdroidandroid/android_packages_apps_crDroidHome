@@ -86,4 +86,7 @@
     <string name="pref_show_events_title">Show upcoming events</string>
     <string name="pref_show_events_summary"></string>
 
+    <!-- Folder titles -->
+    <string name="google_title" translatable="false">Google</string>
+    <string name="play_folder_title">Play</string>
 </resources>
