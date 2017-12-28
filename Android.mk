@@ -49,10 +49,12 @@ LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages android.support.v7.recyclerview \
 
+LOCAL_AAPT_FLAGS += --rename-manifest-package com.crdroid.home
+
 LOCAL_MIN_SDK_VERSION := 26
-LOCAL_PACKAGE_NAME := Launcher3
+LOCAL_PACKAGE_NAME := crDroidHome
 LOCAL_PRIVILEGED_MODULE := true
-LOCAL_OVERRIDES_PACKAGES := Home Launcher2
+LOCAL_OVERRIDES_PACKAGES := Home Launcher2 Launcher3 Trebuchet
 
 LOCAL_FULL_LIBS_MANIFEST_FILES := $(LOCAL_PATH)/AndroidManifest-common.xml
 
