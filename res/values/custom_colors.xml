@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2017 crDroid Android Project
+     Copyright (C) 2017-2018 crDroid Android Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,8 +15,5 @@
      limitations under the License.
 -->
 <resources>
-    <color name="drawer_search_bar_background">#10000000</color>
-    <color name="drawer_search_bar_divider">#10111111</color>
-    <color name="drawer_search_bar_text">#4c4c4c</color>
-    <color name="drawer_search_bar_text_hint">#FF666666</color>
+    <color name="drawer_search_bar_background">@*android:color/secondary_device_default_settings_light</color>
 </resources>

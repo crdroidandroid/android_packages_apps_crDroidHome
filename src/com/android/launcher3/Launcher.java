@@ -39,6 +39,8 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.om.IOverlayManager;
+import android.content.om.OverlayInfo;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -51,6 +53,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Process;
+import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemClock;
 import android.os.Trace;
@@ -338,6 +341,7 @@ public class Launcher extends BaseActivity
     private Context mContext;
     private LauncherTab mLauncherTab;
     private boolean mLauncherTabEnabled;
+    private boolean mDarkMode;
 
     @Thunk void setOrientation() {
         if (mRotationEnabled) {
@@ -480,6 +484,8 @@ public class Launcher extends BaseActivity
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onCreate(savedInstanceState);
         }
+
+        updateTheme();
     }
 
     @Override
@@ -525,6 +531,9 @@ public class Launcher extends BaseActivity
      * @param navBar if true, make the nav bar theme match the isLight param.
      */
     public void activateLightSystemBars(boolean isLight, boolean statusBar, boolean navBar) {
+        isLight = isLight && !mDarkMode;
+        navBar = navBar && !mDarkMode;
+
         int oldSystemUiFlags = getWindow().getDecorView().getSystemUiVisibility();
         int newSystemUiFlags = oldSystemUiFlags;
         if (isLight) {
@@ -4273,6 +4282,7 @@ public class Launcher extends BaseActivity
                     }
                 }
             }
+            updateTheme();
         }
     }
 
@@ -4311,5 +4321,18 @@ public class Launcher extends BaseActivity
                 Manifest.permission.READ_CALENDAR,
                 Manifest.permission.WRITE_CALENDAR},
                 REQUEST_PERMISSION_CALENDAR);
+    }
+
+    private void updateTheme() {
+        OverlayInfo themeInfo = null;
+        try {
+            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
+                   ServiceManager.getService(Context.OVERLAY_SERVICE));
+            themeInfo = overlayManager.getOverlayInfo("com.crdroid.home.theme.dark",
+                   UserHandle.myUserId());
+            mDarkMode = themeInfo != null && themeInfo.isEnabled();
+        } catch (Exception e) {
+            Log.w(TAG, "Can't find theme", e);
+        }
     }
 }

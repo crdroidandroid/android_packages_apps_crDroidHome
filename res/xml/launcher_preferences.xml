@@ -121,7 +121,6 @@
             android:summary="@string/left_tab_description"
             android:defaultValue="true"
             android:persistent="true" />
-
     </PreferenceCategory>
 
     <PreferenceCategory
