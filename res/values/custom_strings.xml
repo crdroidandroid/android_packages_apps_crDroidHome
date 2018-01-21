@@ -92,4 +92,11 @@
 
     <string name="left_tab_label">Google Now tab</string>
     <string name="left_tab_description">Toggle Google Now integration</string>
+
+    <!-- Gestures -->
+    <string name="gestures_category_title">Gestures</string>
+    <string name="swipe_notifications_title">Swipe down</string>
+    <string name="swipe_notifications_summary">Expand status bar notifications</string>
+    <string name="double_tap_sleep_title">Double tap</string>
+    <string name="double_tap_sleep_summary">Put device to sleep</string>
 </resources>

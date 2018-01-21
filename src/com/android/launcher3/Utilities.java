@@ -146,6 +146,8 @@ public final class Utilities {
     static final String KEY_HIDDEN_APPS_SET = "hidden_app_set";
     public static final String SHOW_EVENTS_PREFERENCE_KEY = "pref_showEvents";
     public static final String SHOW_LEFT_TAB_PREFERENCE_KEY = "pref_left_tab";
+    public static final String GESTURE_SWIPE_DOWN_KEY = "pref_swipeNotifications";
+    public static final String GESTURE_DOUBLE_TAP_KEY = "pref_dts";
 
     public static boolean isPropertyEnabled(String propertyName) {
         return Log.isLoggable(propertyName, Log.VERBOSE);
@@ -221,6 +223,14 @@ public final class Utilities {
 
     public static boolean isShowLeftTab(Context context) {
         return getPrefs(context).getBoolean(SHOW_LEFT_TAB_PREFERENCE_KEY, true);
+    }
+
+    public static boolean isSwipeDown(Context context) {
+        return getPrefs(context).getBoolean(GESTURE_SWIPE_DOWN_KEY, true);
+    }
+
+    public static boolean isDoubleTap(Context context) {
+        return getPrefs(context).getBoolean(GESTURE_DOUBLE_TAP_KEY, true);
     }
 
     public static boolean getAllowRotationDefaultValue(Context context) {

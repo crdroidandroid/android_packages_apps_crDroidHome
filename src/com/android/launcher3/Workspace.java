@@ -380,7 +380,8 @@ public class Workspace extends PagedView
                 new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent event) {
-                pm.goToSleep(event.getEventTime());
+                if (Utilities.isDoubleTap(mLauncher))
+                    pm.goToSleep(event.getEventTime());
                 return true;
             }
 
@@ -389,7 +390,8 @@ public class Workspace extends PagedView
                     float velocityX, float velocityY) {
                 if (e1.getY() - e2.getY() > SWIPE_THRESHOLD) {
                     mLauncher.showAppsView(true, false, false);
-                } else if (e1.getY() - e2.getY() < SWIPE_THRESHOLD) {
+                } else if (Utilities.isSwipeDown(mLauncher) &&
+                            (e1.getY() - e2.getY() < SWIPE_THRESHOLD)) {
                     statusBar.expandNotificationsPanel();
                 }
                 return true;
