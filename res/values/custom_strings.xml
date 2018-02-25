@@ -18,6 +18,8 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="crdroid_app_name" translatable="false">crDroid Home</string>
+
     <string name="show_predictive_apps_title">Predictive apps</string>
     <string name="icon_pack">Icon Pack</string>
     <string name="icon_pack_summary">Select an icon Pack</string>
