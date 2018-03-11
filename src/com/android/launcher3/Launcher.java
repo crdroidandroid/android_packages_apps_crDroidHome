@@ -336,7 +336,6 @@ public class Launcher extends BaseActivity
     private boolean mRotationEnabled = false;
 
     private PredictiveAppsProvider mPredictiveAppsProvider;
-    private boolean mShowPredictiveApps;
 
     private Context mContext;
     private LauncherTab mLauncherTab;
@@ -375,10 +374,7 @@ public class Launcher extends BaseActivity
         }
 
         mContext = getApplicationContext();
-        mShowPredictiveApps = Utilities.isPredictiveAppsEnabled(mContext);
-        if (mShowPredictiveApps) {
-             mPredictiveAppsProvider = new PredictiveAppsProvider(mContext);
-        }
+        mPredictiveAppsProvider = new PredictiveAppsProvider(mContext);
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.preOnCreate();
@@ -2813,7 +2809,7 @@ public class Launcher extends BaseActivity
             } else if (user == null || user.equals(Process.myUserHandle())) {
                 // Could be launching some bookkeeping activity
                 startActivity(intent, optsBundle);
-                if (isAllAppsVisible() && mShowPredictiveApps && intent.getComponent() != null) {
+                if (isAllAppsVisible() && intent.getComponent() != null) {
                     mPredictiveAppsProvider.updateComponentCount(intent.getComponent());
                 }
             } else {
@@ -3192,26 +3188,12 @@ public class Launcher extends BaseActivity
      * resumed.
      */
     public void tryAndUpdatePredictedApps() {
-        if (!mShowPredictiveApps) {
-            if (mLauncherCallbacks != null) {
-                List<ComponentKey> apps = mLauncherCallbacks.getPredictedApps();
-                if (apps != null) {
-                    mAppsView.setPredictedApps(apps);
-                    getUserEventDispatcher().setPredictedApps(apps);
-                }
-            }
-        } else {
-            List<ComponentKey> apps;
-            if (mLauncherCallbacks != null) {
-                apps = mLauncherCallbacks.getPredictedApps();
-            } else {
-                apps = mPredictiveAppsProvider.getPredictions();
-                mPredictiveAppsProvider.updateTopPredictedApps();
-            }
+        List<ComponentKey> apps;
+        apps = mPredictiveAppsProvider.getPredictions();
+        mPredictiveAppsProvider.updateTopPredictedApps();
 
-            if (apps != null) {
-                mAppsView.setPredictedApps(apps);
-            }
+        if (apps != null) {
+            mAppsView.setPredictedApps(apps);
         }
     }
 
@@ -4244,6 +4226,7 @@ public class Launcher extends BaseActivity
                 mModel.clearIconCache();
                 mModel.forceReload();
                 mOnResumeNeedsLoad = true;
+                tryAndUpdatePredictedApps();
             }
             if (Utilities.SHOW_SEARCH_BAR_PREFERENCE_KEY.equals(key)) {
                 updateHotseatQsbVisibility();

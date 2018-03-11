@@ -30,6 +30,7 @@ import com.android.launcher3.discovery.AppDiscoveryItem;
 import com.android.launcher3.discovery.AppDiscoveryUpdateState;
 import com.android.launcher3.util.ComponentKey;
 import com.android.launcher3.util.LabelComparator;
+import com.android.launcher3.Utilities;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -195,10 +196,13 @@ public class AlphabeticalAppsList {
     private int mNumPredictedAppsPerRow;
     private int mNumAppRowsInAdapter;
 
+    private Context mContext;
+
     public AlphabeticalAppsList(Context context) {
-        mLauncher = Launcher.getLauncher(context);
-        mIndexer = new AlphabeticIndexCompat(context);
-        mAppNameComparator = new AppInfoComparator(context);
+        mContext = context;
+        mLauncher = Launcher.getLauncher(mContext);
+        mIndexer = new AlphabeticIndexCompat(mContext);
+        mAppNameComparator = new AppInfoComparator(mContext);
     }
 
     /**
@@ -304,7 +308,8 @@ public class AlphabeticalAppsList {
      */
     public void setPredictedApps(List<ComponentKey> apps) {
         mPredictedAppComponents.clear();
-        mPredictedAppComponents.addAll(apps);
+        if (Utilities.isPredictiveAppsEnabled(mContext))
+            mPredictedAppComponents.addAll(apps);
         onAppsUpdated();
     }
 

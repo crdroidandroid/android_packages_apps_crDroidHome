@@ -205,12 +205,6 @@ public class LauncherExtension extends Launcher {
         }
 
         @Override
-        public List<ComponentKey> getPredictedApps() {
-            // To debug app predictions, enable AlphabeticalAppsList#DEBUG_PREDICTIONS
-            return new ArrayList<>();
-        }
-
-        @Override
         public int getSearchBarHeight() {
             return SEARCH_BAR_HEIGHT_NORMAL;
         }

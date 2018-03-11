@@ -8,7 +8,6 @@ import android.os.Process;
 import android.preference.PreferenceManager;
 
 import com.android.launcher3.Launcher;
-import com.android.launcher3.Utilities;
 import com.android.launcher3.util.ComponentKey;
 
 import java.util.ArrayList;
@@ -22,11 +21,12 @@ public class PredictiveAppsProvider {
     private static final int NUM_PREDICTIVE_APPS_TO_HOLD = 9; // since we can't have more than 9 columns
 
     private SharedPreferences sharedPreferences;
-    private Context context;
+
+    public static final String PREDICTED_APPS_KEY = "predicted_apps";
+    public static final String TOP_PREDICTIVE_APPS_KEY = "top_predictive_apps";
 
     public PredictiveAppsProvider(Context context) {
-        this.context = context;
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public void updateComponentCount(ComponentName component) {
@@ -38,10 +38,10 @@ public class PredictiveAppsProvider {
 
         // ensure that the set of predictive apps contains this one
         Set<String> predictiveApps =
-                sharedPreferences.getStringSet(Utilities.PREDICTIVE_APPS_KEY, new HashSet<String>());
+                sharedPreferences.getStringSet(PREDICTED_APPS_KEY, new HashSet<String>());
         if (!predictiveApps.contains(key)) {
             predictiveApps.add(key);
-            sharedPreferences.edit().putStringSet(Utilities.PREDICTIVE_APPS_KEY, predictiveApps).commit();
+            sharedPreferences.edit().putStringSet(PREDICTED_APPS_KEY, predictiveApps).commit();
         }
     }
 
@@ -51,7 +51,7 @@ public class PredictiveAppsProvider {
             public void run() {
                 List< PredictedApp > allPredictions = new ArrayList<>();
                 Set<String> predictiveAppsSet =
-                        sharedPreferences.getStringSet(Utilities.PREDICTIVE_APPS_KEY, new HashSet<String>());
+                        sharedPreferences.getStringSet(PREDICTED_APPS_KEY, new HashSet<String>());
 
                 for (String s : predictiveAppsSet) {
                     allPredictions.add(new PredictedApp(buildComponentFromString(s),
@@ -68,13 +68,13 @@ public class PredictiveAppsProvider {
                     allPredictions = allPredictions.subList(0, NUM_PREDICTIVE_APPS_TO_HOLD);
                 }
 
-                sharedPreferences.edit().putString(Utilities.TOP_PREDICTIVE_APPS_KEY, buildStringFromAppList(allPredictions)).commit();
+                sharedPreferences.edit().putString(TOP_PREDICTIVE_APPS_KEY, buildStringFromAppList(allPredictions)).commit();
             }
         }).start();
     }
 
     public List<ComponentKey> getPredictions() {
-        String predictions = sharedPreferences.getString(Utilities.TOP_PREDICTIVE_APPS_KEY, "");
+        String predictions = sharedPreferences.getString(TOP_PREDICTIVE_APPS_KEY, "");
         if (predictions.isEmpty()) {
             return new ArrayList<>();
         }
