@@ -170,11 +170,19 @@
             android:defaultValue="true"
             android:persistent="true" />
 
+        <SwitchPreference
+            android:key="pref_weather"
+            android:title="@string/show_weather_title"
+            android:summary="@string/show_weather_summary"
+            android:defaultValue="false"
+            android:persistent="true"
+            android:dependency="pref_topWidget" />
+
         <ListPreference
             android:key="pref_weatherIconPack"
             android:title="@string/weather_icon_pack_title"
             android:persistent="true"
-            android:dependency="pref_topWidget" />
+            android:dependency="pref_weather" />
 
         <SwitchPreference
             android:key="pref_showEvents"

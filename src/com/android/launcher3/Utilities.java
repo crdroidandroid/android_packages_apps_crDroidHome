@@ -132,6 +132,7 @@ public final class Utilities {
     public static final String ICON_SHADOW_PREFERENCE_KEY = "pref_iconShadow";
     public static final String SHOW_SEARCH_BAR_PREFERENCE_KEY = "pref_searchBar";
     public static final String SHOW_TOP_WIDGET_PREFERENCE_KEY = "pref_topWidget";
+    public static final String SHOW_WEATHER_PREFERENCE_KEY = "pref_weather";
     public static final String SHOW_HOTSEAT_BG_PREFERENCE_KEY = "pref_hotSeatBgColor";
     public static final String SHOW_HOTSEAT_PREFERENCE_KEY = "pref_hotSeat";
     public static final String WEATHER_ICON_PACK_PREFERENCE_KEY = "pref_weatherIconPack";
@@ -184,6 +185,10 @@ public final class Utilities {
 
     public static boolean isTopSpaceReserved(Context context) {
         return getPrefs(context).getBoolean(SHOW_TOP_WIDGET_PREFERENCE_KEY, true);
+    }
+
+    public static boolean isShowWeather(Context context) {
+        return getPrefs(context).getBoolean(SHOW_WEATHER_PREFERENCE_KEY, false);
     }
 
     public static boolean isShowHotseatBgColor(Context context) {

@@ -126,11 +126,13 @@ public class SettingsActivity extends Activity {
                 }
             });
 
+            final SwitchPreference showWeather = (SwitchPreference) findPreference(Utilities.SHOW_WEATHER_PREFERENCE_KEY) ;
             final ListPreference iconPack = (ListPreference) findPreference(Utilities.WEATHER_ICON_PACK_PREFERENCE_KEY) ;
 
             OmniJawsClient weatherClient = new OmniJawsClient(getActivity());
             if (!weatherClient.isOmniJawsServiceInstalled()) {
                 PreferenceCategory widgetCategory = (PreferenceCategory) findPreference("widget_category");
+                widgetCategory.removePreference(showWeather);
                 widgetCategory.removePreference(iconPack);
             } else {
                 String settingHeaderPackage = Utilities.getWeatherIconPack(getActivity());

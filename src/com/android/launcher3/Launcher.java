@@ -4232,7 +4232,8 @@ public class Launcher extends BaseActivity
                 updateHotseatQsbVisibility();
                 mDeviceProfile.layout(Launcher.this, false /* notifyListeners */);
             }
-            if (Utilities.SHOW_TOP_WIDGET_PREFERENCE_KEY.equals(key)) {
+            if (Utilities.SHOW_TOP_WIDGET_PREFERENCE_KEY.equals(key) ||
+                    Utilities.SHOW_WEATHER_PREFERENCE_KEY.equals(key)) {
                 updateTopWidgetVisibility();
             }
             if (Utilities.SHOW_HOTSEAT_BG_PREFERENCE_KEY.equals(key)) {

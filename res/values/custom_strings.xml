@@ -101,4 +101,8 @@
     <string name="swipe_notifications_summary">Expand status bar notifications</string>
     <string name="double_tap_sleep_title">Double tap</string>
     <string name="double_tap_sleep_summary">Put device to sleep</string>
+
+    <!-- Weather -->
+    <string name="show_weather_title">Show weather</string>
+    <string name="show_weather_summary"></string>
 </resources>
