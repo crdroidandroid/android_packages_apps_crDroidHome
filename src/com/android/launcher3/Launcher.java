@@ -342,6 +342,11 @@ public class Launcher extends BaseActivity
     private boolean mLauncherTabEnabled;
     private boolean mDarkMode;
 
+    private static final String[] DARK_OVERLAYS = {
+            "com.crdroid.home.theme.dark",
+            "com.crdroid.home.theme.black",
+    };
+
     @Thunk void setOrientation() {
         if (mRotationEnabled) {
             unlockScreenOrientation(true);
@@ -4308,15 +4313,20 @@ public class Launcher extends BaseActivity
     }
 
     private void updateTheme() {
-        OverlayInfo themeInfo = null;
-        try {
-            IOverlayManager overlayManager = IOverlayManager.Stub.asInterface(
-                   ServiceManager.getService(Context.OVERLAY_SERVICE));
-            themeInfo = overlayManager.getOverlayInfo("com.crdroid.home.theme.dark",
-                   UserHandle.myUserId());
-            mDarkMode = themeInfo != null && themeInfo.isEnabled();
-        } catch (Exception e) {
-            Log.w(TAG, "Can't find theme", e);
+        boolean isDark = false;
+
+        for (String overlay: DARK_OVERLAYS) {
+            try {
+                IOverlayManager mOverlayManager = IOverlayManager.Stub.asInterface(
+                       ServiceManager.getService(Context.OVERLAY_SERVICE));
+                OverlayInfo themeInfo = mOverlayManager.getOverlayInfo(overlay,
+                       UserHandle.myUserId());
+                if (themeInfo != null && themeInfo.isEnabled())
+                    isDark = true;
+            } catch (Exception e) {
+                Log.w(TAG, "Can't find theme for " + overlay, e);
+            }
         }
+        mDarkMode = isDark;
     }
 }
