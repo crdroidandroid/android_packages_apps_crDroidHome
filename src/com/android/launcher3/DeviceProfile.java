@@ -416,6 +416,16 @@ public class DeviceProfile implements LawnchairPreferences.OnPreferenceChangeLis
                 + topBottomPadding * 2;
     }
 
+     /**
+     * Adjusts the profile so that the icons in app drawer have wider padding.
+    */
+    private void adjustVerticalBarLayoutLabels() {
+        int topBottomPadding = allAppsIconDrawablePaddingPx * (isVerticalBarLayout() ? 2 : 1);
+        allAppsCellHeightPx = allAppsIconSizePx + allAppsIconDrawablePaddingPx
+                + Utilities.calculateTextHeight(allAppsIconTextSizePx)
+                + topBottomPadding * 2;
+    }
+
     private void updateAvailableDimensions(DisplayMetrics dm, Resources res) {
         updateIconSize(1f, res, dm);
 
@@ -479,7 +489,8 @@ public class DeviceProfile implements LawnchairPreferences.OnPreferenceChangeLis
 
         if (isVerticalLayout) {
             // Always hide the Workspace text with vertical bar layout.
-            adjustToHideWorkspaceLabels();
+            adjustVerticalBarLayoutLabels();
+            iconDrawablePaddingPx = cellYPadding;
         }
 
         // Hotseat
