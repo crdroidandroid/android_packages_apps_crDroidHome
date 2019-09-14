@@ -17,4 +17,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name_crdroid">crDroid Home</string>
+
+    <string name="app_description">Based on Lawnchair</string>
+    <string name="app_credits">Credits</string>
 </resources>
