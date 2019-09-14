@@ -117,7 +117,7 @@
         </activity>
 
 
-        <!-- TODO: Display only inside Lawnchair -->
+        <!-- TODO: Display only inside Lawnchair
         <activity-alias
             android:name="ch.deletescape.lawnchair.settings.ui.SettingsLauncherActivity"
             android:targetActivity="ch.deletescape.lawnchair.settings.ui.SettingsActivity"
@@ -129,7 +129,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity-alias>
+        </activity-alias> -->
 
         <activity
             android:autoRemoveFromRecents="true"
