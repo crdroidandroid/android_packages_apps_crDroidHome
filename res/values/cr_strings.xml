@@ -20,4 +20,8 @@
 
     <string name="app_description">Based on Lawnchair</string>
     <string name="app_credits">Credits</string>
+
+    <!-- Folder titles -->
+    <string name="google_title" translatable="false">Google</string>
+    <string name="play_folder_title">Play</string>
 </resources>
