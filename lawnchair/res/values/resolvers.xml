@@ -18,8 +18,8 @@
 
 <resources>
     <string-array name="resolvers_accent">
-        <item>ch.deletescape.lawnchair.colors.PixelAccentResolver</item>
         <item>ch.deletescape.lawnchair.colors.SystemAccentResolver</item>
+        <item>ch.deletescape.lawnchair.colors.PixelAccentResolver</item>
         <item>ch.deletescape.lawnchair.colors.WallpaperMainColorResolver</item>
         <item>ch.deletescape.lawnchair.colors.WallpaperSecondaryColorResolver</item>
         <item>ch.deletescape.lawnchair.colors.WallpaperTertiaryColorResolver</item>

@@ -200,7 +200,7 @@ class ColorEngine private constructor(val context: Context) : LawnchairPreferenc
                     else -> {
                         engine.createColorResolverNullable(key,
                                 LawnchairConfig.getInstance(context).defaultColorResolver)
-                                ?: PixelAccentResolver(createConfig(key, engine))
+                                ?: SystemAccentResolver(createConfig(key, engine))
                     }
                 }
             }
